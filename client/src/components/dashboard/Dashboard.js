@@ -6,6 +6,8 @@ import { getProfile } from '../../actions/profileActions';
 
 import Spinner from '../layout/Spinner';
 import DashboardActions from './DashboardActions';
+import Experience from '../profile-forms/Experience';
+import Education from '../profile-forms/Education';
 
 const Dashboard = ({ getProfile, auth: { user }, profile: { profile, loading } }) => {
   useEffect(() => {
@@ -21,6 +23,8 @@ const Dashboard = ({ getProfile, auth: { user }, profile: { profile, loading } }
       profile ?
         <Fragment>
           <DashboardActions />
+          <Experience experience={profile.experience} />
+          <Education education={profile.education} />
         </Fragment>
 
         : <Fragment>
