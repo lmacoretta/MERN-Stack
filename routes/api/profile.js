@@ -7,6 +7,7 @@ const { check, validationResult } = require('express-validator/check');
 
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
+const Posts = require('../../models/Posts');
 
 /**
  * @route  GET api/profile/me
@@ -171,6 +172,7 @@ router.get('/user/:user_id', async (req, res) => {
 
 router.delete('/', auth, async (req, res) => {
   try {
+    await Posts.deleteMany({ user: req.user.id })
     await Profile.findOneAndRemove({ user: req.user.id });
     await User.findOneAndRemove({ _id: req.user.id });
 
@@ -371,9 +373,9 @@ router.get('/github/:username', async (req, res) => {
     const options = {
       uri: `https://api.github.com/users/${
         req.params.username
-      }/repos?per_page=5&sort=created:asc&client_id=${config.get(
-        'githubClientID'
-      )}&client_secret=${config.get('githubSecret')}`,
+        }/repos?per_page=5&sort=created:asc&client_id=${config.get(
+          'githubClientID'
+        )}&client_secret=${config.get('githubSecret')}`,
       method: 'GET',
       headers: { 'user-agent': 'node.js' }
     };
