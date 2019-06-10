@@ -1,46 +1,48 @@
 import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Spinner from '../layout/Spinner';
-import ProfileItem from './ProfileItem';
-import { getAllProfile } from '../../actions/profileActions';
+import ProfileTop from './ProfileTop';
+import { getProfileById } from '../../actions/profileActions';
 
-
-const Profile = ({ getAllProfile, profile: { profiles, loading } }) => {
+const Profile = ({ getProfileById, profile: { profile, loading }, auth, match }) => {
   useEffect(() => {
-    getAllProfile();
-  }, []);
+    getProfileById(match.params.id);
+  }, [getProfileById, match.params.id]);
 
   return (
     <Fragment>
       {
-        loading ? <Spinner /> : <Fragment>
-          <h1 className="large text-primary">Developers</h1>
-          <p className="lead">
-            <i className="fab fa-connectdevelop"></i>Browse and connect with developers
-          </p>
-          <div className="profiles">
-            {
-              profiles.length > 0 ? (
-                profiles.map(profile => (
-                  <ProfileItem key={profile._id} profile={profile} />
-                ))
-              ) : <h4>No profile founds...</h4>
-            }
+        profile === null || loading ? (<Spinner />) : (<Fragment>
+          <Link to='/profiles' className="btn btn-light">
+            Back to profiles
+          </Link>
+          {
+            auth.isAuntheticated && auth.loading === false && auth.user._id === profile.user._id && (
+              <Link to='/edit-profile' className="btn btn-dark">
+                Edit profile
+              </Link>
+            )
+          }
+          <div className="profile-grid my-1">
+            <ProfileTop profile={profile} />
           </div>
-        </Fragment>
+        </Fragment>)
       }
     </Fragment>
   )
 }
 
 Profile.propTypes = {
-  getAllProfile: PropTypes.func.isRequired,
-  profile: PropTypes.object.isRequired,
+  getProfileById: PropTypes.object.isRequired,
+  profile: PropTypes.func.isRequired,
+  auth: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
-  profile: state.profile
+  profile: state.profile,
+  auth: state.auth
 })
 
-export default connect(mapStateToProps, { getAllProfile })(Profile);
+export default connect(mapStateToProps, { getProfileById })(Profile);
