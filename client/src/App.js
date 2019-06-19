@@ -5,7 +5,7 @@ import './App.css';
 /** Redux */
 import { Provider } from 'react-redux';
 import store from './store';
-import { loadUser } from './actions/authActions'; //action
+import { loadUser } from './actions/authActions';
 import setAuthToken from './utils/setAuthToken';
 
 /** Componets */
