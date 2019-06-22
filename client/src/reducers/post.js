@@ -1,4 +1,4 @@
-import { GET_POSTS, POST_ERROR, UPDATE_LIKES, DELETE_POST, ADD_POST, GET_POST } from '../actions/types';
+import { GET_POSTS, POST_ERROR, UPDATE_LIKES, DELETE_POST, ADD_POST, GET_POST, ADD_COMMENT, REMOVE_ALERT, REMOVE_COMMENT } from '../actions/types';
 
 const initialState = {
   posts: [],
@@ -23,6 +23,10 @@ export default function (state = initialState, action) {
       return { ...state, posts: state.posts.filter(post => post._id !== payload), loading: false } //Retorna los post menos el que fue deleteado.
     case ADD_POST:
       return { ...state, posts: [payload, ...state.posts], loading: false }
+    case ADD_COMMENT:
+      return { ...state, post: { ...state.post, comments: payload } }
+    case REMOVE_COMMENT:
+      return { ...state, post: { ...state.post, comments: state.post.comments.filter(comment => comment._id !== payload) }, loading: false }
     default:
       return state;
   }
