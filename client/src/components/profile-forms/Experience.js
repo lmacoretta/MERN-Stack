@@ -6,7 +6,7 @@ import { deleteExperience } from '../../actions/profileActions';
 
 const Experience = ({ experience, deleteExperience }) => {
   const experiences = experience.map(exp => (
-    <tr key={exp._id}>
+    < tr key={exp._id} >
       <td>{exp.company}</td>
       <td className="hide-sm">{exp.title}</td>
       <td>
@@ -46,4 +46,4 @@ Experience.propTypes = {
   deleteExperience: PropTypes.func.isRequired
 }
 
-export default connect(null, { deleteExperience })(Experience)
+export default connect(null, { deleteExperience })(Experience);

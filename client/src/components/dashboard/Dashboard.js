@@ -13,19 +13,16 @@ const Dashboard = ({ getProfile, auth: { user }, profile: { profile, loading }, 
   useEffect(() => {
     getProfile();
   }, [getProfile]);
-
   return loading && profile === null ? <Spinner /> : <Fragment>
     <h1 className="large text-primary">Dashboard</h1>
     <p className="lead">
       <i className="fas fa-user"></i>Welcome {user && user.name}</p>
-
     {
       profile ?
-        <Fragment>
+        < Fragment >
           <DashboardActions />
           <Experience experience={profile.experience} />
           <Education education={profile.education} />
-
           <div className="my-2">
             <button className="btn btn-danger" onClick={() => deleteAccount()}>
               <i className="fas fas-user-minus"></i> Delete my account

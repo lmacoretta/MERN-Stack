@@ -77,7 +77,7 @@ export const signIn = ({ email, password }) => {
       }
     };
 
-    const body = JSON.stringify({ email, password });
+    const body = { email, password };
 
     try {
       const res = await axios.post('/api/auth', body, config);
@@ -87,7 +87,7 @@ export const signIn = ({ email, password }) => {
         payload: res.data
       });
 
-      //dispatch(loadUser());
+      dispatch(loadUser());
     } catch (err) {
       const errors = err.response.data.errors;
 

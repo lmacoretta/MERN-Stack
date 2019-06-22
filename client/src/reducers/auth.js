@@ -28,7 +28,6 @@ export default (state = initialState, action) => {
         loading: false
       };
     case LOAD_USER:
-      console.log('PASA POR ACA')
       return {
         ...state,
         isAuthenticated: true,

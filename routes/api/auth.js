@@ -14,7 +14,7 @@ const User = require('../../models/User');
  */
 router.get('/', auth, async (req, res) => {
   try {
-    const user = User.findById(req.user.id).select('-password'); //Con select excluyo el password.
+    const user = await User.findById(req.user.id).select('-password'); //Con select excluyo el password.
 
     res.json(user);
   } catch (err) {
