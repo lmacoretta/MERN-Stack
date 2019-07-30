@@ -1,0 +1,6 @@
+{
+  "mongoURI": "mongodb://localhost:27017/mernstack",
+  "jwtSecret": "mysecrettoken",
+  "githubClientID": "ce16b54d86404e70dbc5",
+  "githubSecret": "d192da2c525fdcf1eb09333a69e3973c0ed637da"
+}
