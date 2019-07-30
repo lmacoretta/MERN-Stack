@@ -2,7 +2,7 @@
   "name": "MERN-Stack",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server",
@@ -16,7 +16,7 @@
     "url": "git+https://github.com/lmacoretta/MERN-Stack.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Leandro",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/lmacoretta/MERN-Stack/issues"
